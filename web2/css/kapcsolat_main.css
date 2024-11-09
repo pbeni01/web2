@@ -7,3 +7,7 @@ input {
     padding: 5px 2px;
     margin: 10px 5px;
 }
+.message-input{
+    padding-bottom: 50px;
+    padding-right: 500px;
+}

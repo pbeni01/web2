@@ -9,7 +9,7 @@ class Kapcsolatadmin_Model
 		
 		try {
 			$connection = Database::getConnection();
-			$sql = "select id, name, email, number, message from kapcsolat order by id";
+			$sql = "select id, submitdate, name, email, number, message from kapcsolat order by submitdate";
 			$stmt = $connection->query($sql);
 			$retData['rows'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
@@ -19,6 +19,27 @@ class Kapcsolatadmin_Model
 		}
 		return $retData;
 	}
+	public function delete_data($vars)
+    {
+        $retData["eredmeny"]="OK";
+		$retData['rows'] = Array();
+        try
+        {
+            $connection = Database::getConnection(); //„DELETE FROM kapcsolat WHERE `kapcsolat`.`id` = 2”
+            $sql = "delete from kapcsolat where id=".$vars['rowid'];
+			$stmt = $connection ->query($sql);
+			$sql = "select id, submitdate, name, email, number, message from kapcsolat order by submitdate";
+			$stmt = $connection->query($sql);
+			$retData['rows'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+        }
+        catch (PDOException $e)
+        {
+            $retData['eredmeny'] = "ERROR";
+            $retData['uzenet'] = "Adatbázis hiba: ".$e->getMessage()."!";
+        }
+        return $retData;
+    }
 }
 
 ?>

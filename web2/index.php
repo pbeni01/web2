@@ -1,12 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-//alkalmazás gyökér könyvtára a szerveren
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'].'/web2/');
 
-//URL cím az alkalmazás gyökeréhez
 define('SITE_ROOT', 'http://localhost/web2/');
 
-// a router.php vezérlõ betöltése
 require_once(SERVER_ROOT . 'controllers/' . 'router.php');
 
 ?>

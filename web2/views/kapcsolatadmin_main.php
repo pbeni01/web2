@@ -6,7 +6,7 @@
                 ?>
                 <table>
                 <tr>
-                    <th></th><th>Név</th><th>Email</th><th>Telefonszám</th><th>Üzenet</th><th></th>
+                    <th>ID</th><th>Dátum</th><th>Név</th><th>Email</th><th>Telefonszám</th><th>Üzenet</th><th></th>
                 </tr>
                 <?php
                 $counter = 0;
@@ -34,5 +34,13 @@
                 echo "error that is unkown to programmer";
                 echo $viewData['eredmeny'];
         }
+        
     ?>
 </h2>
+<h2>Felhasználói adatok exportálása:</h2>
+<div>
+<a href="/web2/controllers/kapcsolatadmin_export.php?type=pdf" target="_blank">Exportálás PDF-be</a>
+<a href="/web2/controllers/kapcsolatadmin_export.php?type=excel" target="_blank">Exportálás Excel-be</a>
+
+
+</div>

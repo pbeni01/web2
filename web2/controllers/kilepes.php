@@ -2,16 +2,14 @@
 
 class Kilepes_Controller
 {
-    public $baseName = 'kilepes'; // Meghatározni, hogy melyik oldalon vagyunk
+    public $baseName = 'kilepes'; 
 
-    public function main(array $vars) // A router által továbbított paramétereket kapja
+    public function main(array $vars) 
     {
-        // Kilépés végrehajtása: munkamenet törlése
         session_start();
-        session_unset(); // Minden munkamenet adatot töröl
-        session_destroy(); // Munkamenet teljes megsemmisítése
+        session_unset(); 
+        session_destroy(); 
 
-        // Átirányítás a kezdőlapra vagy a belépés oldalra
         header("Location: " . SITE_ROOT . "belepes");
         exit();
     }

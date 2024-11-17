@@ -5,13 +5,11 @@ if(! isset($_SESSION['userid'])) $_SESSION['userid'] = 0;
 if(! isset($_SESSION['userfirstname'])) $_SESSION['userfirstname'] = "";
 if(! isset($_SESSION['userlastname'])) $_SESSION['userlastname'] = "";
 if(! isset($_SESSION['userlevel'])) $_SESSION['userlevel'] = "1__";
+if(! isset($_SESSION['username'])) $_SESSION['username'] = "";
 
 include(SERVER_ROOT . 'includes/database.inc.php');
 include(SERVER_ROOT . 'includes/menu.inc.php');
 
-// Felbontjuk a paramétereket. Az / elválasztó jellel végzett felbontás megfelelõ lesz.
-// Az elsõ eleme a megtekinteni kívánt oldal neve, a második az aloldal (almenü ponthoz
-// tartozó oldal) neve vagy paraméter lehet.
 
 $page = "nyitolap";
 $subpage = "";
@@ -22,20 +20,20 @@ $request = $_SERVER['QUERY_STRING'];
 if($request != "")
 {
 	$params = explode('/', $request);
-	$page = array_shift($params); // a kért oldal neve
+	$page = array_shift($params); 
 	
-	if(array_key_exists($page, Menu::$menu) && count($params)>0) // Az oldal egy menüpont oldala és van még adat az url-ben
+	if(array_key_exists($page, Menu::$menu) && count($params)>0) 
 	{
-		$subpage = array_shift($params); // a kért aloldal
-		if(! (array_key_exists($subpage, Menu::$menu) && Menu::$menu[$subpage][1] == $page)) // ha nem egy alolal
+		$subpage = array_shift($params); 
+		if(! (array_key_exists($subpage, Menu::$menu) && Menu::$menu[$subpage][1] == $page)) 
 		{
-			$vars[] = $subpage; // akkor ez egy parameter
-			$subpage = ""; // és nincs aloldal
+			$vars[] = $subpage; 
+			$subpage = ""; 
 		}
 		
 	}
 	
-	foreach($params as $p) // a paraméterek tömbje feltöltése
+	foreach($params as $p) 
 	{
 		$vars[] = $p;
 	}
@@ -43,9 +41,12 @@ if($request != "")
 	$vars += $_POST;
 }
 
-// Meghatározzuk a kért oldalhoz tartozó vezérlõt. Ha megtaláltuk
-// a fájlt és a hozzá tartozó vezérlõ oldalt is, akkor betöltjük az
-// elõbbiekben lekérdezett paramétereket továbbadva. 
+if ($page === 'kapcsolatadmin' && $subpage === 'export') {
+    require_once SERVER_ROOT . 'controllers/kapcsolatadmin_export.php';
+    $controller = new Kapcsolatadmin_Export_Controller();
+    $controller->main($vars);
+    exit();
+}
 
 $controllerfile = $page.($subpage != "" ? "_".$subpage : "");
 $target = SERVER_ROOT.'controllers/'.$controllerfile.'.php';

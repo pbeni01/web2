@@ -13,12 +13,10 @@ Class Menu {
                 continue;
             }
     
-            // Csak akkor adjuk hozzá a "Belépés" és "Regisztráció" menüpontokat, ha a felhasználó nincs bejelentkezve
             if ($_SESSION['userid'] == 0 && ($menuitem['url'] == 'belepes' || $menuitem['url'] == 'regisztracio')) {
                 self::$menu[$menuitem['url']] = array($menuitem['nev'], $menuitem['szulo'], $menuitem['jogosultsag']);
             }
     
-            // Ha be van jelentkezve, akkor az összes többi menüpontot adjuk hozzá, kivéve a "Belépés" és "Regisztráció"
             if ($_SESSION['userid'] != 0 && $menuitem['url'] != 'belepes' && $menuitem['url'] != 'regisztracio') {
                 self::$menu[$menuitem['url']] = array($menuitem['nev'], $menuitem['szulo'], $menuitem['jogosultsag']);
             }

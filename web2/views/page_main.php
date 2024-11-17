@@ -9,9 +9,10 @@
     <body>
         <header>
             <div id="user">
-            <?php if (isset($_SESSION['userfirstname']) && !empty($_SESSION['userfirstname'])): ?>
-                Bejelentkezett: <em><?= $_SESSION['userlastname'] . " " . $_SESSION['userfirstname'] ?></em>
-                <?php endif; ?>
+<?php if (isset($_SESSION['userfirstname']) && !empty($_SESSION['userfirstname'])): ?>
+    Bejelentkezett: <?php echo $_SESSION['userlastname'] . ' ' . $_SESSION['userfirstname'] . ' (' . $_SESSION['username'] . ')'; ?>
+<?php endif; ?>
+
             </div>
             <h1 class="header">Web-beadando</h1>
         </header>

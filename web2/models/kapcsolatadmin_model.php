@@ -40,6 +40,13 @@ class Kapcsolatadmin_Model
         }
         return $retData;
     }
+		public function getUsers()
+	{
+		$connection = Database::getConnection();
+		$sql = "SELECT id, csaladi_nev, utonev, email FROM felhasznalok";
+		$stmt = $connection->query($sql);
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
 }
 
 ?>

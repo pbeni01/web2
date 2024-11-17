@@ -22,6 +22,9 @@ class Kapcsolatadmin_Controller
 				$view->assign($name, $value);
 		}
 	}
+	
 }
+
+
 
 ?>
